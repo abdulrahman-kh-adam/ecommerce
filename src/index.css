@@ -2,6 +2,11 @@ body {
   margin: 0;
   font-family: "Archivo", sans-serif;
 }
+
+#root {
+  min-height: 700px !important;
+}
+
 .m-0 {
   margin: 0;
 }
@@ -321,7 +326,7 @@ body {
   border-radius: 9px;
   color: #555550;
   font-family: "Archivo";
-  font-size: 12px;
+  font-size: 17px;
   font-weight: bold;
   background-color: #ffffff;
 }
@@ -427,17 +432,19 @@ body {
 .cart-title {
   color: #555550;
   font-family: Archivo;
-  font-size: 21px;
+  font-size: 30px;
   font-weight: 800;
   letter-spacing: 0;
   line-height: 28px;
-  text-align: right;
 }
 .cart-item-body {
-  height: 229px;
+  /* height: 229px; */
   width: 100%;
   border-radius: 20px;
   background-color: #ffffff;
+  padding: 10px 0;
+  margin-bottom: 25px;
+  padding: 10px;
 }
 .copon-input {
   box-sizing: border-box;
@@ -476,16 +483,17 @@ body {
 
 /* admin style  */
 .sidebar {
-  height: 660px;
-  width: 100%;
+  height: calc(100vh - 150px);
   border-radius: 21px;
   background-color: #ffffff;
+  /* position: fixed; */
+  width: 100%;
 }
 
 .admin-side-text {
   color: #272727;
   font-family: "Archivo";
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   letter-spacing: 0;
   line-height: 20px;
@@ -507,7 +515,6 @@ body {
   font-weight: 800;
   letter-spacing: 0;
   line-height: 28px;
-  text-align: right;
 }
 .item-delete-edit {
   color: #979797;
@@ -525,7 +532,6 @@ body {
   font-size: 16px;
   letter-spacing: 0;
   line-height: 20px;
-  text-align: right;
 }
 .input-form {
   height: 37px;
