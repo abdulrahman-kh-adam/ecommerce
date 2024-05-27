@@ -21,7 +21,6 @@ import AdminAddProduct from "./Pages/Admin/AdminAddProduct";
 import UserAllOrders from "./Pages/User/UserAllOrders";
 import UserFavProducts from "./Pages/User/UserFavProducts";
 import UserAllAdresses from "./Pages/User/UserAllAddresses";
-import UserAddAdress from "./Pages/User/UserAddAddress";
 import UserAddAddress from "./Pages/User/UserAddAddress";
 import UserEditAddress from "./Pages/User/UserEditAddress";
 import UserProfile from "./Pages/User/UserProfile";

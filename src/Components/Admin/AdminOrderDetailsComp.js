@@ -91,7 +91,7 @@ const AdminOrderDetailsComp = () => {
             className="select input-form-area mt-1 px-2 w-50"
           >
             <option value="val">Order Status</option>
-            <option value="val2">Order Confirmed</option>
+            <option value="val2">Order Recieved</option>
             <option value="val2">Order Processing</option>
             <option value="val2">Out for Delivery</option>
             <option value="val2">Delivered</option>

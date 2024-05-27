@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import SectionTitle from "../Utils/SectionTitle";
 import CategoryCard from "./CategoryCard";
-import clothe from "../../images/clothe.png";
-import cat2 from "../../images/cat2.png";
-import labtop from "../../images/labtop.png";
-import sale from "../../images/sale.png";
-import pic from "../../images/pic.png";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategories } from "../../Redux/actions/categoriesAction";
+import Loading from "../Utils/Loading";
 
 const HomeCategory = () => {
+  const dispatch = useDispatch();
+
+  /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, []);
+
+  const categories = useSelector((state) => state.allCategories.categories);
+  const loading = useSelector((state) => state.allCategories.loading);
+  const colors = ["#FFD3E8", "#F4DBA5", "#55CFDF", "#FF6262", "#0034FF"];
+
   return (
     <Container>
       <SectionTitle
@@ -17,11 +26,24 @@ const HomeCategory = () => {
         path="/allcategories"
       />
       <Row className="my-2 d-flex justify-content-between">
-        <CategoryCard title="Electronics" img={clothe} background="#f4dbd5" />
-        <CategoryCard title="Electronics" img={cat2} background="#f4dbd5" />
-        <CategoryCard title="Electronics" img={labtop} background="#f4dbd5" />
-        <CategoryCard title="Electronics" img={sale} background="#f4dbd5" />
-        <CategoryCard title="Electronics" img={pic} background="#f4dbd5" />
+        {!loading ? (
+          categories.data ? (
+            categories.data.slice(0, 5).map((item, idx) => {
+              return (
+                <CategoryCard
+                  background={colors[idx]}
+                  title={item.name}
+                  img={item.image}
+                  key={idx}
+                />
+              );
+            })
+          ) : (
+            <h4>There are no categories exist</h4>
+          )
+        ) : (
+          <Loading />
+        )}
       </Row>
     </Container>
   );
