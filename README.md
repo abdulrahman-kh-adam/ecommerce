@@ -25,6 +25,8 @@
 
 All Rights Reserved.
 
+This project is open-source. Feel free to use or edit, but please ask for permission first.
+
 ## Developing Notes
 
 > React-Redux was the state management library used in the course. I used Redux-Toolkit instead.
