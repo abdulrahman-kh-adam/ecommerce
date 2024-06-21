@@ -20,16 +20,7 @@ const AdminOrderCard = () => {
         </Row>
         <Row className="justify-content-center mt-2">
           <Col sm="12" className=" d-flex flex-row justify-content-start">
-            <div className="d-inline pt-2 cat-title">
-              No of items: <span style={{ fontWeight: "bold" }}>5</span>
-            </div>
-          </Col>
-        </Row>
-        <Row className="justify-content-center mt-2">
-          <Col sm="12" className=" d-flex flex-row justify-content-start">
-            <div className="d-inline pt-2 cat-title">
-              Order Status: <span style={{ fontWeight: "bold" }}>Pending</span>
-            </div>
+            <div className="d-inline pt-2 cat-title">No of items: 5</div>
           </Col>
         </Row>
 
