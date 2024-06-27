@@ -1,7 +1,12 @@
 import React from "react";
-import { Row } from "react-bootstrap";
+import { Alert, Row, Spinner } from "react-bootstrap";
 
-const SideFilter = () => {
+const SideFilter = ({
+  categoriesList,
+  brandsList,
+  categoriesLoading,
+  brandsLoading,
+}) => {
   return (
     <div className="mt-3">
       <Row>
@@ -11,22 +16,24 @@ const SideFilter = () => {
             <input type="checkbox" value="" />
             <div className="filter-sub ms-2 ">All</div>
           </div>
-          <div className="d-flex mt-2">
-            <input type="checkbox" value="" />
-            <div className="filter-sub ms-2 ">Electronics</div>
-          </div>
-          <div className="d-flex mt-2">
-            <input type="checkbox" value="" />
-            <div className="filter-sub ms-2 ">Clothes</div>
-          </div>
-          <div className="d-flex mt-2">
-            <input type="checkbox" value="" />
-            <div className="filter-sub ms-2 ">Games</div>
-          </div>
-          <div className="d-flex mt-2">
-            <input type="checkbox" value="" />
-            <div className="filter-sub ms-2 ">Phones</div>
-          </div>
+          {categoriesLoading ? (
+            <Spinner animation="border" role="status"></Spinner>
+          ) : categoriesList.data[0] ? (
+            categoriesList.data.map((category, idx) => {
+              return (
+                <div className="d-flex mt-2">
+                  <input type="checkbox" value={category.id} />
+                  <div className="filter-sub ms-2" key={idx}>
+                    {category.attributes.name}
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <Alert variant="danger" style={{ textAlign: "center" }}>
+              No categories found!
+            </Alert>
+          )}
         </div>
 
         <div className="filter-title mt-3">Brand</div>
@@ -35,14 +42,24 @@ const SideFilter = () => {
             <input type="checkbox" value="" />
             <div className="filter-sub ms-2 ">All</div>
           </div>
-          <div className="d-flex mt-2">
-            <input type="checkbox" value="" />
-            <div className="filter-sub ms-2 ">Apple</div>
-          </div>
-          <div className="d-flex mt-2">
-            <input type="checkbox" value="" />
-            <div className="filter-sub ms-2 ">Samsung</div>
-          </div>
+          {brandsLoading ? (
+            <Spinner animation="border" role="status"></Spinner>
+          ) : brandsList.data[0] ? (
+            brandsList.data.map((brand, idx) => {
+              return (
+                <div className="d-flex mt-2">
+                  <input type="checkbox" value={brand.id} />
+                  <div className="filter-sub ms-2" key={idx}>
+                    {brand.attributes.name}
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <Alert variant="danger" style={{ textAlign: "center" }}>
+              No categories found!
+            </Alert>
+          )}
         </div>
 
         <div className="filter-title my-3">Price</div>

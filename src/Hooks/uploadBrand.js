@@ -1,20 +1,19 @@
-export const uploadCategory = async (catName, catColor, catImage) => {
+export const uploadBrand = async (brandName, brandImage) => {
   const imgReq = await fetch(`${process.env.REACT_APP_API_URL}/upload`, {
     method: "POST",
-    body: catImage,
+    body: brandImage,
     headers: {
       Authorization: `Bearer ${process.env.REACT_APP_MAIN_TOKEN}`,
     },
   });
   const imgRes = await imgReq.json();
-  const infoReq = await fetch(`${process.env.REACT_APP_API_URL}/categories`, {
+  const infoReq = await fetch(`${process.env.REACT_APP_API_URL}/brands`, {
     method: "POST",
     body: JSON.stringify({
       data: {
-        name: catName,
-        color: catColor,
+        name: brandName,
         image: imgRes[0].id,
-        slug: catName.replaceAll(" ", "_").toLowerCase(),
+        slug: brandName.replaceAll(" ", "_").toLowerCase(),
       },
     }),
     headers: {

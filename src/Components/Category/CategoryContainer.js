@@ -1,13 +1,13 @@
 import React from "react";
 import CategoryCard from "./CategoryCard";
-import { Row, Spinner } from "react-bootstrap";
+import { Alert, Row, Spinner } from "react-bootstrap";
 
 const CategoryContainer = ({ categoriesList, loading }) => {
   return (
-    <Row className="my-2 d-flex justify-content-between">
+    <Row className="my-2 d-flex justify-content-start">
       {loading ? (
         <Spinner animation="border" role="status"></Spinner>
-      ) : categoriesList.data ? (
+      ) : categoriesList.data[0] ? (
         categoriesList.data.map((category, idx) => {
           return (
             <CategoryCard
@@ -19,7 +19,9 @@ const CategoryContainer = ({ categoriesList, loading }) => {
           );
         })
       ) : (
-        "No categories found!"
+        <Alert variant="danger" style={{ textAlign: "center" }}>
+          No categories found!
+        </Alert>
       )}
     </Row>
   );

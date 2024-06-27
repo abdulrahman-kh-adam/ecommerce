@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Row, Spinner } from "react-bootstrap";
+import { Alert, Container, Row, Spinner } from "react-bootstrap";
 import SectionTitle from "../Utils/SectionTitle";
 import CategoryCard from "./CategoryCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +25,7 @@ const HomeCategory = () => {
       <Row className="my-2 d-flex justify-content-start">
         {loading ? (
           <Spinner animation="border" role="status"></Spinner>
-        ) : categoriesList.data ? (
+        ) : categoriesList.data[0] ? (
           categoriesList.data.slice(0, 6).map((category, idx) => {
             return (
               <CategoryCard
@@ -37,7 +37,9 @@ const HomeCategory = () => {
             );
           })
         ) : (
-          "No categories found!"
+          <Alert variant="danger" style={{ textAlign: "center" }}>
+            No categories found!
+          </Alert>
         )}
       </Row>
     </Container>

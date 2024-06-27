@@ -1,12 +1,20 @@
-import React from "react";
-import { Container, Row } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Alert, Container, Row, Spinner } from "react-bootstrap";
 import SectionTitle from "../Utils/SectionTitle";
 import BrandCard from "../Brands/BrandCard";
-import brand1 from "../../images/brand1.png";
-import brand2 from "../../images/brand2.png";
-import brand3 from "../../images/brand3.png";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBrands } from "../../Redux/Brands Slice/brandsSlice";
 
-const HomeCategory = () => {
+const HomeBrands = () => {
+  const brandsList = useSelector((state) => state.brands.brands);
+  const loading = useSelector((state) => state.brands.loading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllBrands());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Container>
       <SectionTitle
@@ -14,16 +22,26 @@ const HomeCategory = () => {
         buttonText="More"
         path="/allbrands"
       />
-      <Row className="my-2 d-flex justify-content-between">
-        <BrandCard img={brand1} />
-        <BrandCard img={brand1} />
-        <BrandCard img={brand2} />
-        <BrandCard img={brand2} />
-        <BrandCard img={brand3} />
-        <BrandCard img={brand3} />
+      <Row className="my-2 d-flex justify-content-start">
+        {loading ? (
+          <Spinner animation="border" role="status" />
+        ) : brandsList.data[0] ? (
+          brandsList.data.slice(0, 6).map((brand, idx) => {
+            return (
+              <BrandCard
+                img={`${process.env.REACT_APP_GENERAL_URL}${brand.attributes.image.data.attributes.url}`}
+                key={idx}
+              />
+            );
+          })
+        ) : (
+          <Alert variant="danger" style={{ textAlign: "center" }}>
+            No brands found!
+          </Alert>
+        )}
       </Row>
     </Container>
   );
 };
 
-export default HomeCategory;
+export default HomeBrands;

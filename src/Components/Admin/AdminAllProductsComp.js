@@ -1,20 +1,27 @@
 import React from "react";
 import AdminProductCard from "./AdminProductCard";
-import { Row } from "react-bootstrap";
+import { Row, Spinner } from "react-bootstrap";
 
-const AdminAllProductsComp = () => {
+const AdminAllProductsComp = ({ products, loading }) => {
   return (
     <div>
       <div className="admin-content-text">Manage All Products</div>
       <Row className="justify-content-start">
-        <AdminProductCard />
-        <AdminProductCard />
-        <AdminProductCard />
-        <AdminProductCard />
-        <AdminProductCard />
-        <AdminProductCard />
-        <AdminProductCard />
-        <AdminProductCard />
+        {loading ? (
+          <Spinner animation="border" role="status"></Spinner>
+        ) : (
+          products.map((product, idx) => {
+            return (
+              <AdminProductCard
+                thumb={`${process.env.REACT_APP_GENERAL_URL}${product.attributes.thumb.url}`}
+                name={product.attributes.name}
+                rate={product.attributes.rate}
+                price={product.attributes.price}
+                id={product.id}
+              />
+            );
+          })
+        )}
       </Row>
     </div>
   );

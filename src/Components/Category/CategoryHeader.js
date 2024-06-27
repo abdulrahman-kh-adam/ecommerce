@@ -1,9 +1,20 @@
-import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Alert, Col, Container, Row, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategories } from "../../Redux/Categories Slice/CategoriesSlice";
 
 const CategoryHeader = () => {
+  const categoriesList = useSelector((state) => state.categories.categories);
+  const loading = useSelector((state) => state.categories.loading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllCategories());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div class="cat-header mb-3">
+    <div className="cat-header mb-3">
       <Container>
         <Row>
           <Col
@@ -16,12 +27,22 @@ const CategoryHeader = () => {
               paddingBottom: "10px",
             }}
           >
-            <div class="cat-text-header">All</div>
-            <div class="cat-text-header">Electronics</div>
-            <div class="cat-text-header">Clothes</div>
-            <div class="cat-text-header">Games</div>
-            <div class="cat-text-header">Phones</div>
-            <div class="cat-text-header">Children</div>
+            <div className="cat-text-header">All</div>
+            {loading ? (
+              <Spinner animation="border" role="status"></Spinner>
+            ) : categoriesList.data ? (
+              categoriesList.data.map((category, idx) => {
+                return (
+                  <div className="cat-text-header">
+                    {category.attributes.name}
+                  </div>
+                );
+              })
+            ) : (
+              <Alert variant="danger" style={{ textAlign: "center" }}>
+                No categories found!
+              </Alert>
+            )}
           </Col>
         </Row>
       </Container>
