@@ -13,8 +13,7 @@
 
 ### Back-End :
 
-- **Strapi** : Headless CMS to manage the databases and APIs.
-- **RestFUL APIs** : All APIs used in this application is handled using RestFUL requests.
+All APIs are provided from index academy
 
 ## Licence
 
